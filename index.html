@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X O Game</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"
+        defer></script>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./javaScript.js"></script>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="border border-black"><h1 class="text-center shadow">Welcome To Advanced tic tac toe</h1>
+            <div class="row result border border-black">
+            </div>
+            <div class="row my-5 fs-1 d-flex justify-content-around">
+
+
+                <!--    A    -->
+                <div class="col-3 m-1 bg-warning border-black">
+
+
+
+                    <div class="row d-flex justify-content-between gap-1 m-auto">
+
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a gx-0" id="A1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="A9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    B    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="B9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    C    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="C9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    D    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="D9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    E    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="E9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!--    F    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="F9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    G    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="G9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!--    H    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="H9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!--    I    -->
+                <div class="col-3 m-1 bg-warning border-black">
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I1" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I2" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I3" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I4" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I5" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I6" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                    <div class="row  d-flex justify-content-between gap-1 m-auto">
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I7" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I8" onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                        <div class="col-3 my-2 bg-success">
+                            <div class="a" id="I9" class=" " onclick="insert_X_Y(this.id)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-75 m-auto ">
+                <button id="restartButton" type="reset" class="btn btn-warning" onclick="resetGame()">Reset</button>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
