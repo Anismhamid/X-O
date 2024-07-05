@@ -3,7 +3,9 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+.border{
+    height: 100vh;
+}
 .a {
     height: 50px;
 
@@ -12,16 +14,16 @@
 
 .result {
     width: 80%;
-    height: 100px;
+    height: 50px;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 @media(max-width:550px) {
     .a {
-        height: 10px;
+        height: 50px;
     }
 }

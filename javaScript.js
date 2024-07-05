@@ -1,5 +1,9 @@
 let currentPlayer = 'X';
-let boardState = ['', '', '', '', '', '', '', '', '',];
+let boardState = ['', '', '', '', '', '', '', '',];
+let counter = 0;
+
+
+
 
 function insert_X_Y(id) {
     let cell = document.getElementById(id);
@@ -9,13 +13,17 @@ function insert_X_Y(id) {
         boardState[parseInt(id.substring(1)) - 1] = currentPlayer;
 
         let winner = checkWinner();
-        if (winner) {
-            let result = document.querySelector('.result');
-            result.innerHTML = `Player ${winner} wins`;
-            disableAllClicks();
-        } else if (boardState.every(cell => cell !== '')) {
-            document.querySelector('.result').innerHTML = "לא נצחתם";
-            disableAllClicks();
+        if (winner === 'X') {
+            let result = document.querySelector('#result-right');
+            result.innerHTML = `${--counter}`;
+        }
+        else if (winner === 'O') {
+            let result = document.querySelector('#result-left');
+            result.innerHTML = `${++counter}`;
+            //     disableAllClicks();
+            // } else if (boardState.every(cell => cell !== '')) {
+            //     document.querySelector('.result').innerHTML = "לא נצחתם";
+            //     disableAllClicks();
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         }
@@ -34,14 +42,22 @@ function checkWinner() {
     for (let combination of winningCombinations) {
         let [a, b, c] = combination;
         if (boardState[a] !== '' && boardState[a] === boardState[b] && boardState[b] === boardState[c]) {
-            return boardState[a];
+            if (boardState[a] === 'X') {
+                document.getElementById('result-left').innerText = ++counter
+                return boardState[a];
+            } else {
+                console.log('O is winner');
+                return boardState[a];
+            }
         }
     }
     return null;
 }
 
+
+
 function resetGame() {
-    boardState = ['', '', '', '', '', '', '', '', ''];
+    boardState = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     let cells = document.querySelectorAll('.a');
     cells.forEach(cell => {
         cell.innerHTML = '';
@@ -50,6 +66,8 @@ function resetGame() {
     currentPlayer = 'X';
     enableAllClicks();
 }
+
+
 let disables = {
     disableA: ['#A'],
     disableB: ['#A', '#B'],
@@ -66,7 +84,7 @@ let disables = {
 
 function disableAllClicks() {
     disables.disableA.forEach(id => {
-        let cells = document.querySelectorAll(id + i);
+        let cells = document.querySelectorAll(id);
         cells.forEach(cell => {
             cell.onclick = null;
         });
@@ -74,7 +92,7 @@ function disableAllClicks() {
 }
 
 function enableAllClicks() {
-    let cells = document.querySelectorAll(id + i);
+    let cells = document.querySelectorAll(id);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
