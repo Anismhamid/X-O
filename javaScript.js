@@ -1,8 +1,8 @@
 let currentPlayer = 'X';
-let boardState = ['', '', '', '', '', '', '', '',];
+let boardState = ['', '', '', '', '', '', '', '', ''];
 let xCounter = 0;
 let oCounter = 0;
-
+let disableAll = disableAllClicks('.b,.c,.d,.e,.f,.g,.h,.i');
 
 
 
@@ -14,28 +14,30 @@ function insert_X_Y(id) {
         boardState[parseInt(id.substring(1)) - 1] = currentPlayer;
 
         let winner = checkWinner();
-        if (winner === 'X') {
+        if (winner == 'X') {
+            disableAllClicks('.a');
+            enableAllClicks('.b')
             xCounter++;
             document.getElementById('result-left').innerHTML = `X - ${xCounter}`;
-        } else if (winner === 'O') {
+            checkWinner()
+        } else if (winner == 'O') {
+            disableAllClicks('.a');
+            enableAllClicks('.b')
             oCounter++;
             document.getElementById('result-right').innerHTML = `O - ${oCounter}`;
+            checkWinner()
+
         }
 
-        if (xCounter + oCounter === 9) {
-            document.querySelector('.results').innerHTML = `نتائج اللاعب X: ${xCounter} فوز, اللاعب O: ${oCounter} فوز`;
+        if (xCounter + oCounter == 9) {
+            document.querySelector('.results').innerHTML = ` X: ${xCounter} , O: ${oCounter}`;
+            disableAllClicks('.a');
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            disableAll
         }
     }
 }
-
-
-
-
-
-
-
 function checkWinner() {
     const winningCombinations = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -45,12 +47,12 @@ function checkWinner() {
     for (let combination of winningCombinations) {
         let [a, b, c] = combination;
         if (boardState[a] !== '' && boardState[a] === boardState[b] && boardState[b] === boardState[c]) {
+
             return boardState[a];
         }
     }
     return null;
 }
-
 
 
 function resetGame() {
@@ -62,24 +64,21 @@ function resetGame() {
     currentPlayer = 'X';
     xCounter = 0;
     oCounter = 0;
-    document.getElementById('result-left').innerHTML = 'X - 0';
-    document.getElementById('result-right').innerHTML = 'O - 0';
+    document.getElementById('result-left').innerHTML = `X - ${xCounter}`;
+    document.getElementById('result-right').innerHTML = `O - ${oCounter}`;
     document.querySelector('.results').innerHTML = '';
-    enableAllClicks();
+    enableAllClicks('.a');
 }
 
+function disableAllClicks(disableid) {
+    let cells = document.querySelectorAll(disableid);
+    cells.forEach(cell => {
+        cell.onclick = null;
+    });
+}
 
-function disableAllClicks() {
-        let cells = document.querySelectorAll('.a');
-        cells.forEach(cell => {
-            cell.onclick = null;
-        });
-    };
-
-
-
-function enableAllClicks() {
-    let cells = document.querySelectorAll('.a');
+function enableAllClicks(enableId) {
+    let cells = document.querySelectorAll(enableId);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
@@ -88,5 +87,3 @@ function enableAllClicks() {
         }
     });
 }
-
-
