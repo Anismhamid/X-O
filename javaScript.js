@@ -44,6 +44,7 @@ function insert_X_Y(cellId) {
             }
             // איפוס את הלוח לאחר סיום המשחק
             disableBoard(boardId);
+            setBoardColorRed(boardId)
             resetBoard()
 
         } else {
@@ -125,7 +126,7 @@ function enableBoard(boardId) {
 // פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
 
 function setBoardColorRed(boardId) {
-    // استخدم querySelectorAll لاستهداف كل عنصر يحتوي على boardId
+
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-warning');
@@ -134,10 +135,18 @@ function setBoardColorRed(boardId) {
 }
 
 function resetBoardColor(boardId) {
-    // استخدم querySelectorAll لاستهداف كل عنصر يحتوي على boardId
+
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-danger');
-        cell.classList.add('bg-warning');
+        cell.classList.add('bg-light');
     });
+}
+
+function resetGame() {
+    let cells = document.querySelectorAll(`.a`);
+    resetBoardColor()
+
+    cells.innerHTML = ''
+    enableBoard()
 }
