@@ -13,7 +13,8 @@ let boardState = {
 let gamesCounter = 0;
 let xCounter = 0;
 let oCounter = 0;
-
+let player1Name = prompt('שם שחקן ראשון :');
+let player2Name = prompt('שם שחקן שני :');
 // פונקציה לטיפול בהזזת שחקן
 function insert_X_Y(cellId) {
     let boardId = cellId[0]; // קבל את מזהה הלוח (A עד I)
@@ -29,16 +30,16 @@ function insert_X_Y(cellId) {
 
         // בדוק אם יש מנצח לאחר כל מהלך
         let winner = checkWinner();
-        
+
         if (winner) {
             // טפל בסיום המשחק על סמך המנצח
             if (winner === 'X') {
                 xCounter++;
-                document.getElementById('result-left').innerText = `X - ${xCounter}`;
+                document.getElementById('result-left').innerText = `${player1Name}- ${xCounter}`;
                 disableBoard(boardId)
             } else if (winner === 'O') {
                 oCounter++;
-                document.getElementById('result-right').innerText = `O - ${oCounter}`;
+                document.getElementById('result-right').innerText = `${player2Name} - ${oCounter}`;
                 disableBoard(boardId)
             }
             // איפוס את הלוח לאחר סיום המשחק
@@ -48,6 +49,10 @@ function insert_X_Y(cellId) {
         } else {
             // החלפת שחקנים
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            let xOChecker = setTimeout(function () {
+                document.getElementById('turn').innerHTML = currentPlayer
+            }, 300)
+            xOChecker
         }
     }
 }
