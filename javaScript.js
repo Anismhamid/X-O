@@ -34,6 +34,7 @@ function insert_X_Y(cellId) {
             if (winner === 'X') {
                 xCounter++;
                 document.getElementById('result-left').innerText = `X - ${xCounter}`;
+                disableBoard()
             } else if (winner === 'O') {
                 oCounter++;
                 document.getElementById('result-right').innerText = `O - ${oCounter}`;
@@ -42,7 +43,7 @@ function insert_X_Y(cellId) {
             // איפוס את הלוח לאחר סיום המשחק
             resetBoard();
         } else {
-            // שחקנים חלופיים
+            // החלפת שחקנים
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         }
     }
@@ -71,14 +72,14 @@ function checkWinner() {
     return null; // החזר null אם אין זוכה
 }
 
-// Function to reset the board
+// פונקציה לאיפוס הלוח
 function resetBoard() {
     for (let boardId in boardState) {
         boardState[boardId] = ['', '', '', '', '', '', '', '', ''];
     }
 
     for (let boardId in boardState) {
-        let cells = document.querySelectorAll(`#${boardId} td`);
+        let cells = document.querySelectorAll(`#${boardId} .a`);
         cells.forEach(cell => {
             cell.innerText = '';
         });
@@ -89,7 +90,7 @@ function resetBoard() {
 
 // פונקציה להשבית קליקים בלוח מסוים
 function disableBoard(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} td`);
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.onclick = null;
     });
@@ -97,8 +98,8 @@ function disableBoard(boardId) {
 
 // פונקציה לאפשר לחיצות על לוח ספציפי
 
-function enableBoard(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} td`);
+function enableBoard() {
+    let cells = document.querySelectorAll(`#${boardId}`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
@@ -110,8 +111,8 @@ function enableBoard(boardId) {
 
 // פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
 
-function setBoardColorRed(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} td`);
+function setBoardColorRed() {
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-warning');
         cell.classList.add('bg-danger');
@@ -120,8 +121,8 @@ function setBoardColorRed(boardId) {
 
 // פונקציה לאיפוס צבע הרקע של לוח ספציפי
 
-function resetBoardColor(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} td`);
+function resetBoardColor() {
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-danger');
         cell.classList.add('bg-warning');
