@@ -35,11 +35,11 @@ function insert_X_Y(cellId) {
             // טפל בסיום המשחק על סמך המנצח
             if (winner === 'X') {
                 xCounter++;
-                document.getElementById('result-left').innerText = `${player1Name}- ${xCounter}`;
+                document.getElementById('result-left').innerText = `${player1Name},${xCounter}`;
                 disableBoard(boardId)
             } else if (winner === 'O') {
                 oCounter++;
-                document.getElementById('result-right').innerText = `${player2Name} - ${oCounter}`;
+                document.getElementById('result-right').innerText = `${player2Name},${oCounter}`;
                 disableBoard(boardId)
             }
             // איפוס את הלוח לאחר סיום המשחק
