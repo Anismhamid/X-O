@@ -51,9 +51,9 @@ function insert_X_Y(cellId) {
             // החלפת שחקנים
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
             let xOChecker = setTimeout(function () {
-                document.getElementById('turn').innerHTML = currentPlayer
+                document.getElementById('turn').innerHTML = `${currentPlayer}`
             }, 300)
-            xOChecker
+            return xOChecker
         }
     }
 }
