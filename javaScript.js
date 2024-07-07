@@ -1,99 +1,129 @@
 let currentPlayer = 'X';
-let boardState = [
-    ['', '', ''],
-    ['', '', ''],
-    ['', '', '']
-];
-let centerCounter = 0;
+let boardState = {
+    A: ['', '', '', '', '', '', '', '', ''],
+    B: ['', '', '', '', '', '', '', '', ''],
+    C: ['', '', '', '', '', '', '', '', ''],
+    D: ['', '', '', '', '', '', '', '', ''],
+    E: ['', '', '', '', '', '', '', '', ''],
+    F: ['', '', '', '', '', '', '', '', ''],
+    G: ['', '', '', '', '', '', '', '', ''],
+    H: ['', '', '', '', '', '', '', '', ''],
+    I: ['', '', '', '', '', '', '', '', ''],
+};
+let gamesCounter = 0;
 let xCounter = 0;
 let oCounter = 0;
 
-function insert_X_Y(id) {
-    let cell = document.getElementById(id);
+// פונקציה לטיפול בהזזת שחקן
+function insert_X_Y(cellId) {
+    let boardId = cellId[0]; // קבל את מזהה הלוח (A עד I)
+    let index = parseInt(cellId.slice(1)) - 1; // קבל את אינדקס התא (0 עד 8)
 
-    if (cell.innerHTML === '') {
-        cell.innerHTML = currentPlayer;
-        boardState[parseInt(id.substring(1)) - 1] = currentPlayer;
+    // בדוק אם התא ריק
+    if (boardState[boardId][index] === '') {
+        // עדכן את מצב הלוח
+        boardState[boardId][index] = currentPlayer;
 
+        // עדכן את ממשק המשתמש כדי להציג X או O בתא שלוחצים
+        document.getElementById(cellId).innerText = currentPlayer;
+
+        // בדוק אם יש מנצח לאחר כל מהלך
         let winner = checkWinner();
-        if (winner == 'X' || winner == 'O') {
-            setTheElementRed('A');
-            document.getElementById('result-center').innerHTML = `games - ${centerCounter}`;
-            console.log(winner);
+        if (winner) {
+            // טפל בסיום המשחק על סמך המנצח
+            if (winner === 'X') {
+                xCounter++;
+                document.getElementById('result-left').innerText = `X - ${xCounter}`;
+            } else if (winner === 'O') {
+                oCounter++;
+                document.getElementById('result-right').innerText = `O - ${oCounter}`;
+            }
+
+            // איפוס את הלוח לאחר סיום המשחק
+            resetBoard();
         } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-
-
-        }
-        if (winner === 'X') {
-            xCounter++;
-            document.getElementById('result-left').innerHTML = `X - ${xCounter}`;
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-        } else if (winner === 'O') {
-            oCounter++;
-            document.getElementById('result-right').innerHTML = `O - ${oCounter}`;
+            // שחקנים חלופיים
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
         }
     }
 }
 
-
+// פונקציה לבדיקת זוכה
 function checkWinner() {
     const winningCombinations = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], // שורות
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], // עמודות
+        [0, 4, 8], [2, 4, 6] // אלכסונים
     ];
-    for (let combination of winningCombinations) {
-        let [a, b, c] = combination;
-        if (boardState[a] === boardState[b] && boardState[b] === boardState[c] && boardState[a] !== '') {
-            centerCounter++;
-            return boardState[a];
+
+    // חזור על כל לוח
+    for (let boardId in boardState) {
+        let cells = boardState[boardId];
+
+        // בדוק כל שילוב מנצח
+        for (let combination of winningCombinations) {
+            let [a, b, c] = combination;
+            if (cells[a] !== '' && cells[a] === cells[b] && cells[b] === cells[c]) {
+                return cells[a]; // החזר את המנצח ('X' או 'O')
+            }
         }
     }
-    return null;
+    return null; // החזר null אם אין זוכה
 }
 
-function resetGame() {
-    boardState = [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', '']
-    ];
-    let cells = document.querySelectorAll('.a');
-    cells.forEach(cell => {
-        cell.innerHTML = '';
-    });
+// Function to reset the board
+function resetBoard() {
+    for (let boardId in boardState) {
+        boardState[boardId] = ['', '', '', '', '', '', '', '', ''];
+    }
+
+    for (let boardId in boardState) {
+        let cells = document.querySelectorAll(`#${boardId} td`);
+        cells.forEach(cell => {
+            cell.innerText = '';
+        });
+    }
+    gamesCounter++;
     currentPlayer = 'X';
-    xCounter = 1;
-    oCounter = 1;
-    totalMoves = 0;
-    document.getElementById('result-left').innerHTML = `X - ${xCounter}`;
-    document.getElementById('result-right').innerHTML = `O - ${oCounter}`;
 }
 
-function disableAllClicks(disableId) {
-    let cells = document.querySelectorAll(disableId);
+// פונקציה להשבית קליקים בלוח מסוים
+function disableBoard(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} td`);
     cells.forEach(cell => {
         cell.onclick = null;
     });
 }
 
-function enableAllClicks(enableId) {
-    let cells = document.querySelectorAll(enableId);
+// פונקציה לאפשר לחיצות על לוח ספציפי
+
+function enableBoard(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} td`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
-                insert_X_Y(this.id);
+                insert_X_Y(cell.id);
             };
         }
     });
 }
 
-function setTheElementRed(id) {
-    document.getElementById(id).className = 'col-md-3 m-1 bg-danger border-black';
+// פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
+
+function setBoardColorRed(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} td`);
+    cells.forEach(cell => {
+        cell.classList.remove('bg-warning');
+        cell.classList.add('bg-danger');
+    });
 }
 
-function setTheElementGreen(id) {
-    document.getElementById(id).className = 'col-md-3 m-1 bg-primary border-black';
+// פונקציה לאיפוס צבע הרקע של לוח ספציפי
+
+function resetBoardColor(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} td`);
+    cells.forEach(cell => {
+        cell.classList.remove('bg-danger');
+        cell.classList.add('bg-warning');
+    });
 }
