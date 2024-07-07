@@ -97,7 +97,7 @@ function resetBoard() {
         console.log(boardId[i]);
     }
     setBoardColorRed()
-    ++gamesCounter;
+    gamesCounter++;
     currentPlayer = 'X';
     document.querySelector('#result-center').innerHTML = `${gamesCounter}`
 }
@@ -113,7 +113,7 @@ function disableBoard(boardId) {
 // פונקציה לאפשר לחיצות על לוח ספציפי
 
 function enableBoard(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} .a`);
+    let cells = document.querySelectorAll(`.a`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
@@ -146,7 +146,9 @@ function resetBoardColor(boardId) {
 function resetGame() {
     let cells = document.querySelectorAll(`.a`);
     resetBoardColor()
-
+    gamesCounter = 0;
+    xCounter = 0;
+    oCounter = 0;
     cells.innerHTML = ''
-    enableBoard()
+    enableBoard(boardId)
 }
