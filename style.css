@@ -40,14 +40,3 @@
     cursor: pointer;
 }
 
-.a:hover,
-.b:hover,
-.c:hover,
-.d:hover,
-.e:hover,
-.f:hover,
-.g:hover,
-.h:hover,
-.i:hover {
-    background-color: #2a9e3e;
-}
