@@ -13,8 +13,13 @@ let boardState = {
 let gamesCounter = 0;
 let xCounter = 0;
 let oCounter = 0;
-let player1Name = prompt('שם שחקן ראשון :');
-let player2Name = prompt('שם שחקן שני :');
+let player1Name = prompt('שם שחקן של ה - X :');
+document.getElementById('player-X').innerText = player1Name
+let player2Name = prompt('שם שחקן של ה - O :');
+document.getElementById('player-O').innerText = player2Name
+
+
+
 // פונקציה לטיפול בהזזת שחקן
 function insert_X_Y(cellId) {
     let boardId = cellId[0]; // קבל את מזהה הלוח (A עד I)
@@ -24,6 +29,14 @@ function insert_X_Y(cellId) {
     if (boardState[boardId][index] === '') {
         // עדכן את מצב הלוח
         boardState[boardId][index] = currentPlayer;
+        if (currentPlayer === 'X') {
+            document.getElementById(cellId).style.backgroundColor = 'blue'
+            checkWinner();
+        } else if (currentPlayer === 'O') {
+            document.getElementById(cellId).style.backgroundColor = 'red'
+            checkWinner();
+        }
+
 
         // עדכן את ממשק המשתמש כדי להציג X או O בתא שלוחצים
         document.getElementById(cellId).innerText = currentPlayer;
@@ -35,11 +48,11 @@ function insert_X_Y(cellId) {
             // טפל בסיום המשחק על סמך המנצח
             if (winner === 'X') {
                 xCounter++;
-                document.getElementById('result-left').innerText = `${player1Name},${xCounter}`;
+                document.getElementById('result-left').innerText = xCounter;
                 disableBoard(boardId)
             } else if (winner === 'O') {
                 oCounter++;
-                document.getElementById('result-right').innerText = `${player2Name},${oCounter}`;
+                document.getElementById('result-right').innerText = oCounter;
                 disableBoard(boardId)
             }
             // איפוס את הלוח לאחר סיום המשחק
@@ -93,16 +106,13 @@ function resetBoard() {
             cell.innerText = '';
         });
     }
-    for (let i = 0; i < boardId.length; i++) {
-        console.log(boardId[i]);
-    }
     setBoardColorRed()
     gamesCounter++;
     currentPlayer = 'X';
     document.querySelector('#result-center').innerHTML = `${gamesCounter}`
 }
 
-// פונקציה להשבית קליקים בלוח מסוים
+// פונקציה להשבתת קליקים בלוח מסוים
 function disableBoard(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
@@ -110,9 +120,9 @@ function disableBoard(boardId) {
     });
 }
 
-// פונקציה לאפשר לחיצות על לוח ספציפי
+// פונקציה לאפשר לחיצות על כל הלוחות
 
-function enableBoard(boardId) {
+function enableBoard() {
     let cells = document.querySelectorAll(`.a`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
@@ -139,7 +149,7 @@ function resetBoardColor(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-danger');
-        cell.classList.add('bg-light');
+        cell.classList.add('bg-success');
     });
 }
 
@@ -151,4 +161,4 @@ function resetGame() {
     oCounter = 0;
     cells.innerHTML = ''
     enableBoard(boardId)
-}
+}setBoardColorRed(boardId[index])
