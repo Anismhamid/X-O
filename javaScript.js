@@ -35,10 +35,11 @@ function insert_X_Y(cellId) {
             if (winner === 'X') {
                 xCounter++;
                 document.getElementById('result-left').innerText = `X - ${xCounter}`;
-                disableBoard()
+                disableBoard(boardId)
             } else if (winner === 'O') {
                 oCounter++;
                 document.getElementById('result-right').innerText = `O - ${oCounter}`;
+                disableBoard(boardId)
             }
             // איפוס את הלוח לאחר סיום המשחק
             disableBoard(boardId);
@@ -75,24 +76,24 @@ function checkWinner() {
 }
 
 // פונקציה לאיפוס הלוח
-let boardId;
+
 function resetBoard() {
     for (boardId in boardState) {
         boardState[boardId] = ['', '', '', '', '', '', '', '', ''];
     }
-
     for (let boardId in boardState) {
         let cells = document.querySelectorAll(`#${boardId} .a`);
         cells.forEach(cell => {
             cell.innerText = '';
         });
     }
-    console.log(boardId);
-    setBoardColorRed(boardId)
+    for (let i = 0; i < boardId.length; i++) {
+        console.log(boardId[i]);
+    }
+    setBoardColorRed()
     ++gamesCounter;
     currentPlayer = 'X';
     document.querySelector('#result-center').innerHTML = `${gamesCounter}`
-
 }
 
 // פונקציה להשבית קליקים בלוח מסוים
@@ -119,17 +120,17 @@ function enableBoard(boardId) {
 // פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
 
 function setBoardColorRed(boardId) {
-    let cells = document.querySelectorAll(`#${boardId}`);
+    // استخدم querySelectorAll لاستهداف كل عنصر يحتوي على boardId
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-warning');
         cell.classList.add('bg-danger');
     });
 }
 
-// פונקציה לאיפוס צבע הרקע של לוח ספציפי
-
 function resetBoardColor(boardId) {
-    let cells = document.querySelectorAll(`#${boardId}`);
+    // استخدم querySelectorAll لاستهداف كل عنصر يحتوي على boardId
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-danger');
         cell.classList.add('bg-warning');
