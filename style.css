@@ -3,9 +3,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-.border{
+
+.border {
     height: 100vh;
 }
+
 .a {
     height: 50px;
 
@@ -26,4 +28,26 @@
     .a {
         height: 50px;
     }
+}
+
+.a{
+    box-shadow: 0px 0px 5px black;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.a:hover,
+.b:hover,
+.c:hover,
+.d:hover,
+.e:hover,
+.f:hover,
+.g:hover,
+.h:hover,
+.i:hover {
+    background-color: #2a9e3e;
 }

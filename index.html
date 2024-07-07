@@ -21,8 +21,9 @@
             <h1 class="text-center shadow">Welcome To Advanced tic tac toe</h1>
 
             <div class="row result border border-black">
-                <div class="col-6 " id="result-left">0</div>
-                <div class="col-6" id="result-right">0</div>
+                <div class="col-4 " id="result-left">0</div>
+                <div class="col-4 " id="result-center">0</div>
+                <div class="col-4" id="result-right">0</div>
             </div>
 
 
@@ -30,7 +31,7 @@
 
 
                 <!--    A    -->
-                <div class="col-md-2 m-1 bg-warning border-black">1
+                <div class="col-md-3 m-1 bg-warning border-black" id="A">1
 
 
 
@@ -84,7 +85,7 @@
 
 
                 <!--    B    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="B">2
+                <div class="col-md-3 m-1 bg-warning border-black" id="B">2
 
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
@@ -126,7 +127,7 @@
 
 
                 <!--    C    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="C">3
+                <div class="col-md-3 m-1 bg-warning border-black" id="C">3
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
 
 
@@ -172,13 +173,12 @@
 
             </div>
 
-
-
             <div class="row my-5 fs-1 d-flex justify-content-between">
 
 
                 <!--    D    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="D">4
+                <div class="col-md-3 m-1 bg-warning border-black" id="D">4
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a d" id="D1" onclick="insert_X_Y(this.id)"></div>
@@ -192,6 +192,7 @@
                             <div class="a d" id="D3" onclick="insert_X_Y(this.id)"></div>
                         </div>
                     </div>
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a d" id="D4" onclick="insert_X_Y(this.id)"></div>
@@ -203,6 +204,7 @@
                             <div class="a d" id="D6" onclick="insert_X_Y(this.id)"></div>
                         </div>
                     </div>
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a d" id="D7" onclick="insert_X_Y(this.id)"></div>
@@ -219,8 +221,10 @@
 
 
                 <!--    E    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="E">5
+                <div class="col-md-3 m-1 bg-warning border-black" id="E">5
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
+
                         <div class="col-3 my-2 bg-success">
                             <div class="a e" id="E1" onclick="insert_X_Y(this.id)"></div>
                         </div>
@@ -232,7 +236,9 @@
                         <div class="col-3 my-2 bg-success">
                             <div class="a e" id="E3" onclick="insert_X_Y(this.id)"></div>
                         </div>
+
                     </div>
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a e" id="E4" onclick="insert_X_Y(this.id)"></div>
@@ -244,6 +250,7 @@
                             <div class="a e" id="E6" onclick="insert_X_Y(this.id)"></div>
                         </div>
                     </div>
+
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a e" id="E7" onclick="insert_X_Y(this.id)"></div>
@@ -255,13 +262,14 @@
                             <div class="a e" id="E9" class=" " onclick="insert_X_Y(this.id)"></div>
                         </div>
                     </div>
+
                 </div>
 
 
 
 
                 <!--    F    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="F">6
+                <div class="col-md-3 m-1 bg-warning border-black" id="F">6
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a f" id="F1" onclick="insert_X_Y(this.id)"></div>
@@ -306,7 +314,7 @@
             <div class="row my-5 fs-1 d-flex justify-content-between">
 
                 <!--    G    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="G">7
+                <div class="col-md-3 m-1 bg-warning border-black" id="G">7
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a g" id="G1" onclick="insert_X_Y(this.id)"></div>
@@ -347,7 +355,7 @@
 
 
                 <!--    H    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="H">8
+                <div class="col-md-3 m-1 bg-warning border-black" id="H">8
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a h" id="H1" onclick="insert_X_Y(this.id)"></div>
@@ -389,7 +397,7 @@
 
 
                 <!--    I    -->
-                <div class="col-md-2 m-1 bg-warning border-black" id="I">9
+                <div class="col-md-3 m-1 bg-warning border-black" id="I">9
                     <div class="row  d-flex justify-content-between gap-1 m-auto">
                         <div class="col-3 my-2 bg-success">
                             <div class="a i" id="I1" onclick="insert_X_Y(this.id)"></div>
@@ -429,7 +437,7 @@
             </div>
 
 
-            
+
             <div class="row w-75 m-auto ">
                 <button id="restartButton" type="reset" class="btn btn-warning" onclick="resetGame()">Reset</button>
             </div>
