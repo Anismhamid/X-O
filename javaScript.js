@@ -13,15 +13,15 @@ let boardState = {
 let gamesCounter = 0;
 let xCounter = 0;
 let oCounter = 0;
-// let player1Name = prompt('שם שחקן של ה - X :');
-// let player2Name = prompt('שם שחקן של ה - O :');
-// if (player1Name === '') {
-//     document.getElementById('player-X').innerText = `X - Player`
-//     document.getElementById('player-O').innerText = `O - Player`
-// } else {
-//     document.getElementById('player-X').innerText = player1Name
-//     document.getElementById('player-O').innerText = player2Name
-// }
+let player1Name = ''; /*=  prompt('שם שחקן של ה - X :'); */
+let player2Name = '' /* = prompt('שם שחקן של ה - O :'); */
+if (player1Name === '') {
+    document.getElementById('player-X').innerText = `X - Player`
+    document.getElementById('player-O').innerText = `O - Player`
+} else {
+    document.getElementById('player-X').innerText = player1Name
+    document.getElementById('player-O').innerText = player2Name
+}
 
 
 
@@ -34,46 +34,60 @@ function insert_X_Y(cellId) {
     if (boardState[boardId][index] === '') {
         // עדכן את מצב הלוח
         boardState[boardId][index] = currentPlayer;
+        let cell = document.getElementById(cellId);
         if (currentPlayer === 'X') {
-            document.getElementById(cellId).style.backgroundColor = '#6CD4FF'
-            checkWinner();
-        } else if (currentPlayer === 'O') {
-            document.getElementById(cellId).style.backgroundColor = '#D36135'
-            checkWinner();
+            console.log(cellId);
+            disableCellsBasedOnPlayer(cellId);
+            cell.style.backgroundColor = '#6CD4FF';
+        }
+        else if (currentPlayer === 'O') {
+            console.log(cellId);
+            disableCellsBasedOnPlayer(cellId);
+            cell.style.backgroundColor = '#D36135';
         }
 
 
         // עדכן את ממשק המשתמש כדי להציג X או O בתא שלוחצים
-        document.getElementById(cellId).innerText = currentPlayer;
+        cell.innerText = currentPlayer;
+
+
+
+
 
         // בדוק אם יש מנצח לאחר כל מהלך
         let winner = checkWinner();
 
         if (winner) {
-            // טפל בסיום המשחק על סמך המנצח
-            if (winner === 'X') {
-                xCounter++;
-                document.getElementById('result-left').innerText = xCounter;
-                disableBoard(boardId)
-            } else if (winner === 'O') {
-                oCounter++;
-                document.getElementById('result-right').innerText = oCounter;
-                disableBoard(boardId)
-            }
-            // איפוס את הלוח לאחר סיום המשחק
-            disableBoard(boardId);
-            setBoardColorRed(boardId)
-            resetBoard()
+            handleGameEnd(winner)
 
         } else {
-            // החלפת שחקנים
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            let xOChecker = setTimeout(function () {
-                document.getElementById('turn').innerHTML = `${currentPlayer}`
-            }, 300)
-            return xOChecker
+            switchPlayers();
         }
     }
+}
+
+function switchPlayers() {
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+
+    document.getElementById('turn').innerHTML = currentPlayer;
+}
+
+
+
+
+function handleGameEnd(winner) {
+    if (winner === 'X') {
+        xCounter++;
+        document.getElementById('result-left').innerText = xCounter;
+    } else if (winner === 'O') {
+        oCounter++;
+        document.getElementById('result-right').innerText = oCounter;
+    }
+
+    // Additional actions on game end
+    disableBoard(boardId);
+    setBoardColorRed(boardId);
+    resetBoard();
 }
 
 // פונקציה לבדיקת זוכה
@@ -99,8 +113,12 @@ function checkWinner() {
     return null; // החזר null אם אין זוכה
 }
 
-// פונקציה לאיפוס הלוח
 
+
+
+
+
+// פונקציה לאיפוס הלוח
 function resetBoard() {
     for (boardId in boardState) {
         boardState[boardId] = ['', '', '', '', '', '', '', '', ''];
@@ -117,6 +135,9 @@ function resetBoard() {
     document.querySelector('#result-center').innerHTML = `${gamesCounter}`
 }
 
+
+
+
 // פונקציה להשבתת קליקים בלוח מסוים
 function disableBoard(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
@@ -125,10 +146,142 @@ function disableBoard(boardId) {
     });
 }
 
+
+
+
+function disableCells(cellIds) {
+    cellIds.forEach(id => {
+        disableBoard(id);
+    });
+}
+
+
+
+
+
+function disableCellsBasedOnPlayer(cellId) {
+    switch (cellId) {
+        case 'A1':
+        case 'B1':
+        case 'C1':
+        case 'D1':
+        case 'E1':
+        case 'F1':
+        case 'G1':
+        case 'H1':
+        case 'I1':
+            disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            break;
+
+        case 'A2':
+        case 'B2':
+        case 'C2':
+        case 'D2':
+        case 'E2':
+        case 'F2':
+        case 'G2':
+        case 'H2':
+        case 'I2':
+            disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
+            break;
+
+        case 'A3':
+        case 'B3':
+        case 'C3':
+        case 'D3':
+        case 'E3':
+        case 'F3':
+        case 'G3':
+        case 'H3':
+        case 'I3':
+            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
+            break;
+
+        case 'A4':
+        case 'B4':
+        case 'C4':
+        case 'D4':
+        case 'E4':
+        case 'F4':
+        case 'G4':
+        case 'H4':
+        case 'I4':
+            disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            break;
+
+        case 'A5':
+        case 'B5':
+        case 'C5':
+        case 'D5':
+        case 'E5':
+        case 'F5':
+        case 'G5':
+        case 'H5':
+        case 'I5':
+            disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
+            break;
+
+        case 'A6':
+        case 'B6':
+        case 'C6':
+        case 'D6':
+        case 'E6':
+        case 'F6':
+        case 'G6':
+        case 'H6':
+        case 'I6':
+            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
+            break;
+
+        case 'A7':
+        case 'B7':
+        case 'C7':
+        case 'D7':
+        case 'E7':
+        case 'F7':
+        case 'G7':
+        case 'H7':
+        case 'I7':
+            disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
+            break;
+
+        case 'A8':
+        case 'B8':
+        case 'C8':
+        case 'D8':
+        case 'E8':
+        case 'F8':
+        case 'G8':
+        case 'H8':
+        case 'I8':
+            disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
+            break;
+
+        case 'A9':
+        case 'B9':
+        case 'C9':
+        case 'D9':
+        case 'E9':
+        case 'F9':
+        case 'G9':
+        case 'H9':
+        case 'I9':
+            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H']);
+            break;
+
+        default:
+            break;
+    }
+}
+
+
+
+
+
 // פונקציה לאפשר לחיצות על כל הלוחות
 
-function enableBoard() {
-    let cells = document.querySelectorAll(`.a`);
+function enableBoard(iii) {
+    let cells = document.querySelectorAll(`#${iii}.a`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
@@ -138,19 +291,26 @@ function enableBoard() {
     });
 }
 
+
+
+
+
 // פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
-
 function setBoardColorRed(boardId) {
-
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-warning');
         cell.classList.add('bg-danger');
     });
+    return boardId
 }
 
-function resetBoardColor(boardId) {
 
+
+
+
+
+function resetBoardColor(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-danger');
@@ -158,12 +318,20 @@ function resetBoardColor(boardId) {
     });
 }
 
+
+
+
+
 function resetGame() {
-    let cells = document.querySelectorAll(`.a`);
-    resetBoardColor()
-    gamesCounter = 0;
+    resetBoard();
     xCounter = 0;
     oCounter = 0;
-    cells.innerHTML = ''
-    enableBoard(boardId)
-} 
+    gamesCounter = 0;
+    document.getElementById('result-left').innerText = xCounter;
+    document.getElementById('result-right').innerText = oCounter;
+    document.getElementById('result-center').innerText = gamesCounter;
+    document.querySelectorAll('.a').forEach(cell => {
+        cell.innerText = '';
+    });
+    enableBoard();
+}

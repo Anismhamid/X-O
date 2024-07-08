@@ -54,12 +54,12 @@
 
 .nums {
     color: rgb(0, 0, 0);
-    font-size: 9rem;
-    position: absolute;
-    z-index: 0;
-    transition: color 100s initial;
-    animation: shadow 1s infinite;
+    font-size: 10rem;
+    position: relative;
+    z-index: 1;
+    animation: shadow 3s infinite;
     font-weight: bold;
+    filter: blur(5px);
 }
 
 @keyframes shadow {
@@ -67,23 +67,26 @@
         color: rgb(255, 255, 255);
     }
 
-    50% {
-        color: rgb(40, 20, 20);
+    10% {
+        color: rgb(207, 40, 40);
     }
 
-    /* 30% {
-        color: rgb(131, 58, 58);
-    }
-    50% {
-        color: rgb(181, 71, 71);
-    } */
-    70% {
-        color: rgb(0, 0, 0);
+    20% {
+        color: rgb(126, 159, 60);
     }
 
+    30% {
+        color: rgb(29, 139, 117);
+
+    }
+
+    50% {
+        color: rgb(177, 29, 138);
+
+    }
 
     100% {
-        color: rgb(0, 0, 0);
+        color: rgb(189, 165, 27);
     }
 }
 
@@ -112,7 +115,7 @@
         }
 
         50% {
-            color: rgb(40, 20, 20);
+            color: rgb(170, 45, 45);
         }
 
         70% {
