@@ -173,6 +173,7 @@ function disableBoard(boardId) {
 
 let disableCellsBasedOnPlayer = function (cellId) {
 
+
     enableAllCells()
 
     switch (cellId) {
@@ -187,6 +188,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'I1':
             disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
             enableBoard('A');
+            setBoardColorRed('A', 'danger')
             break;
 
         case 'A2':
@@ -200,6 +202,8 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'I2':
             disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
             enableBoard('D');
+            setBoardColorRed('A', 'warning')
+            setBoardColorRed('D', 'danger')
             break;
 
         case 'A3':
@@ -213,6 +217,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'I3':
             disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
             enableBoard('G');
+            setBoardColorRed('G', 'danger')
             break;
 
         case 'A4':
@@ -320,36 +325,21 @@ function enableBoard(boardId) {
 
 
 // פונקציה להגדיר את צבע הרקע של לוח ספציפי לאדום
-function setBoardColorRed(boardId) {
+function setBoardColorRed(boardId, newColor) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.classList.remove('bg-warning');
-        cell.classList.add('bg-danger');
+        cell.classList.add(`bg-${newColor}`);
     });
-    return boardId
+    return newColor;
 }
 
 
 
 
-
-
-function resetBoardColor(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} .a`);
-    cells.forEach(cell => {
-        cell.classList.remove('bg-danger');
-        cell.classList.add('bg-success');
-    });
-}
-
-
-
-
-// إعادة تعيين اللعبة بأكملها
 function resetGame() {
     resetBoard();
     enableAllCells()
-
     xCounter = 0;
     oCounter = 0;
     gamesCounter = 0;
@@ -358,6 +348,6 @@ function resetGame() {
     document.getElementById('result-center').innerText = gamesCounter;
     document.querySelectorAll('.a').forEach(cell => {
         cell.innerText = '';
-        cell.style.backgroundColor = '#fff'
+        cell.style.backgroundColor = '#f8ad30'
     });
 }
