@@ -95,8 +95,8 @@ function handleGameEnd(winner) {
     }
 
     // Additional actions on game end
-    disableBoard(boardId);
-    setBoardColorRed(boardId);
+    disableBoard();
+    setBoardColorRed();
     resetBoard();
 }
 
