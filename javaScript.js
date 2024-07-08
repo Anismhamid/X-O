@@ -16,8 +16,8 @@ let oCounter = 0;
 let player1Name = ''; /*=  prompt('שם שחקן של ה - X :'); */
 let player2Name = '' /* = prompt('שם שחקן של ה - O :'); */
 if (player1Name === '') {
-    document.getElementById('player-X').innerText = `X - Player`
-    document.getElementById('player-O').innerText = `O - Player`
+    document.getElementById('player-X').innerHTML = `<i class="fa-solid fa-x fa-spin"></i> - Player`
+    document.getElementById('player-O').innerHTML = `<i class="fa-solid fa-o fa-spin text-danger"></i> - Player`
 } else {
     document.getElementById('player-X').innerText = player1Name
     document.getElementById('player-O').innerText = player2Name
@@ -294,6 +294,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
             break;
 
         default:
+            enableAllCells()
             break;
     }
 }
@@ -347,6 +348,8 @@ function resetBoardColor(boardId) {
 // إعادة تعيين اللعبة بأكملها
 function resetGame() {
     resetBoard();
+    enableAllCells()
+
     xCounter = 0;
     oCounter = 0;
     gamesCounter = 0;
@@ -355,10 +358,6 @@ function resetGame() {
     document.getElementById('result-center').innerText = gamesCounter;
     document.querySelectorAll('.a').forEach(cell => {
         cell.innerText = '';
+        cell.style.backgroundColor = '#fff'
     });
 }
-
-// تشغيل اللعبة عند بدء التحميل
-document.addEventListener('DOMContentLoaded', function () {
-    enableBoard();
-});
