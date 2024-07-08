@@ -13,10 +13,15 @@ let boardState = {
 let gamesCounter = 0;
 let xCounter = 0;
 let oCounter = 0;
-let player1Name = prompt('שם שחקן של ה - X :');
-document.getElementById('player-X').innerText = player1Name
-let player2Name = prompt('שם שחקן של ה - O :');
-document.getElementById('player-O').innerText = player2Name
+// let player1Name = prompt('שם שחקן של ה - X :');
+// let player2Name = prompt('שם שחקן של ה - O :');
+// if (player1Name === '') {
+//     document.getElementById('player-X').innerText = `X - Player`
+//     document.getElementById('player-O').innerText = `O - Player`
+// } else {
+//     document.getElementById('player-X').innerText = player1Name
+//     document.getElementById('player-O').innerText = player2Name
+// }
 
 
 
@@ -30,10 +35,10 @@ function insert_X_Y(cellId) {
         // עדכן את מצב הלוח
         boardState[boardId][index] = currentPlayer;
         if (currentPlayer === 'X') {
-            document.getElementById(cellId).style.backgroundColor = 'blue'
+            document.getElementById(cellId).style.backgroundColor = '#6CD4FF'
             checkWinner();
         } else if (currentPlayer === 'O') {
-            document.getElementById(cellId).style.backgroundColor = 'red'
+            document.getElementById(cellId).style.backgroundColor = '#D36135'
             checkWinner();
         }
 
@@ -161,4 +166,4 @@ function resetGame() {
     oCounter = 0;
     cells.innerHTML = ''
     enableBoard(boardId)
-}setBoardColorRed(boardId[index])
+} setBoardColorRed(boardId[index])
