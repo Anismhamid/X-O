@@ -166,4 +166,4 @@ function resetGame() {
     oCounter = 0;
     cells.innerHTML = ''
     enableBoard(boardId)
-} setBoardColorRed(boardId[index])
+} 
