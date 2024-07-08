@@ -23,7 +23,11 @@ if (player1Name === '') {
     document.getElementById('player-O').innerText = player2Name
 }
 
-
+function enableAllCells() {
+    for (let boardId in boardState) {
+        enableBoard(boardId);
+    }
+}
 
 // פונקציה לטיפול בהזזת שחקן
 function insert_X_Y(cellId) {
@@ -37,11 +41,13 @@ function insert_X_Y(cellId) {
         let cell = document.getElementById(cellId);
         if (currentPlayer === 'X') {
             console.log(cellId);
+
             disableCellsBasedOnPlayer(cellId);
+
+
             cell.style.backgroundColor = '#6CD4FF';
         }
         else if (currentPlayer === 'O') {
-            console.log(cellId);
             disableCellsBasedOnPlayer(cellId);
             cell.style.backgroundColor = '#D36135';
         }
@@ -62,9 +68,13 @@ function insert_X_Y(cellId) {
 
         } else {
             switchPlayers();
+
         }
+        disableCellsBasedOnPlayer(cellId);
     }
 }
+
+
 
 function switchPlayers() {
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
@@ -138,13 +148,6 @@ function resetBoard() {
 
 
 
-// פונקציה להשבתת קליקים בלוח מסוים
-function disableBoard(boardId) {
-    let cells = document.querySelectorAll(`#${boardId} .a`);
-    cells.forEach(cell => {
-        cell.onclick = null;
-    });
-}
 
 
 
@@ -152,14 +155,26 @@ function disableBoard(boardId) {
 function disableCells(cellIds) {
     cellIds.forEach(id => {
         disableBoard(id);
+        console.log(`disabled - ${id}`);
     });
 }
 
 
 
+// פונקציה להשבתת קליקים בלוח מסוים
+function disableBoard(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} .a`);
+    cells.forEach(cell => {
+        cell.onclick = null;
+        console.log(boardId);
+    });
+}
 
 
-function disableCellsBasedOnPlayer(cellId) {
+let disableCellsBasedOnPlayer = function (cellId) {
+
+    enableAllCells()
+
     switch (cellId) {
         case 'A1':
         case 'B1':
@@ -171,6 +186,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H1':
         case 'I1':
             disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            enableBoard('A');
             break;
 
         case 'A2':
@@ -183,6 +199,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H2':
         case 'I2':
             disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
+            enableBoard('D');
             break;
 
         case 'A3':
@@ -195,6 +212,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H3':
         case 'I3':
             disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
+            enableBoard('G');
             break;
 
         case 'A4':
@@ -207,6 +225,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H4':
         case 'I4':
             disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            enableBoard('B');
             break;
 
         case 'A5':
@@ -219,6 +238,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H5':
         case 'I5':
             disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
+            enableBoard('E');
             break;
 
         case 'A6':
@@ -231,6 +251,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H6':
         case 'I6':
             disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
+            enableBoard('H');
             break;
 
         case 'A7':
@@ -243,6 +264,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H7':
         case 'I7':
             disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
+            enableBoard('C');
             break;
 
         case 'A8':
@@ -255,6 +277,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H8':
         case 'I8':
             disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
+            enableBoard('F');
             break;
 
         case 'A9':
@@ -267,6 +290,7 @@ function disableCellsBasedOnPlayer(cellId) {
         case 'H9':
         case 'I9':
             disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H']);
+            enableBoard('I');
             break;
 
         default:
@@ -280,8 +304,8 @@ function disableCellsBasedOnPlayer(cellId) {
 
 // פונקציה לאפשר לחיצות על כל הלוחות
 
-function enableBoard(iii) {
-    let cells = document.querySelectorAll(`#${iii}.a`);
+function enableBoard(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         if (cell.innerHTML === '') {
             cell.onclick = function () {
@@ -290,7 +314,6 @@ function enableBoard(iii) {
         }
     });
 }
-
 
 
 
@@ -321,7 +344,7 @@ function resetBoardColor(boardId) {
 
 
 
-
+// إعادة تعيين اللعبة بأكملها
 function resetGame() {
     resetBoard();
     xCounter = 0;
@@ -333,5 +356,9 @@ function resetGame() {
     document.querySelectorAll('.a').forEach(cell => {
         cell.innerText = '';
     });
-    enableBoard();
 }
+
+// تشغيل اللعبة عند بدء التحميل
+document.addEventListener('DOMContentLoaded', function () {
+    enableBoard();
+});
