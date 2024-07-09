@@ -22,10 +22,14 @@ if (player1Name === '') {
     document.getElementById('player-X').innerText = player1Name
     document.getElementById('player-O').innerText = player2Name
 }
+setBoardColorRed()
+
+
 
 function enableAllCells() {
     for (let boardId in boardState) {
         enableBoard(boardId);
+
     }
 }
 
@@ -41,10 +45,7 @@ function insert_X_Y(cellId) {
         let cell = document.getElementById(cellId);
         if (currentPlayer === 'X') {
             console.log(cellId);
-
             disableCellsBasedOnPlayer(cellId);
-
-
             cell.style.backgroundColor = '#6CD4FF';
         }
         else if (currentPlayer === 'O') {
@@ -95,7 +96,6 @@ function handleGameEnd(winner) {
     }
 
     // Additional actions on game end
-    disableBoard();
     setBoardColorRed();
     resetBoard();
 }
@@ -139,7 +139,6 @@ function resetBoard() {
             cell.innerText = '';
         });
     }
-    setBoardColorRed()
     gamesCounter++;
     currentPlayer = 'X';
     document.querySelector('#result-center').innerHTML = `${gamesCounter}`
@@ -166,13 +165,22 @@ function disableBoard(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
         cell.onclick = null;
-        console.log(boardId);
     });
 }
 
 
-let disableCellsBasedOnPlayer = function (cellId) {
 
+
+function resetBbackgroundColor(boardId) {
+    let cells = document.querySelectorAll(`#${boardId} .a`);
+    cells.forEach(cell => {
+        cell.style.backgroundColor = '#000'
+    });
+}
+
+
+
+let disableCellsBasedOnPlayer = function (cellId) {
 
     enableAllCells()
 
@@ -186,9 +194,22 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G1':
         case 'H1':
         case 'I1':
-            disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
-            enableBoard('A');
-            setBoardColorRed('A', 'danger')
+            let disableCells1 = disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            if (disableCells1) {
+                enableBoard('A');
+                resetBbackgroundColor('A');
+
+            } else {
+                setBoardColorRed('A', 'light');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A2':
@@ -200,10 +221,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G2':
         case 'H2':
         case 'I2':
-            disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
-            enableBoard('D');
-            setBoardColorRed('A', 'warning')
-            setBoardColorRed('D', 'danger')
+            let disableCells2 = disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
+            if (disableCells2) {
+                enableBoard('D');
+                resetBbackgroundColor('D');
+            } else {
+                setBoardColorRed('D', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A3':
@@ -215,9 +247,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G3':
         case 'H3':
         case 'I3':
-            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
-            enableBoard('G');
-            setBoardColorRed('G', 'danger')
+            let disableCells3 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
+            if (disableCells3) {
+                enableBoard('G');
+                setBoardColorRed('G', 'light')
+            } else {
+                setBoardColorRed('G', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A4':
@@ -229,8 +273,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G4':
         case 'H4':
         case 'I4':
-            disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
-            enableBoard('B');
+            let disableCells4 = disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+            if (disableCells4) {
+                enableBoard('B');
+                setBoardColorRed('B', 'danger')
+            } else {
+                setBoardColorRed('B', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A5':
@@ -242,8 +299,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G5':
         case 'H5':
         case 'I5':
-            disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
-            enableBoard('E');
+            let disableCells5 = disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
+            if (disableCells5) {
+                enableBoard('E');
+                setBoardColorRed('E', 'danger')
+            } else {
+                setBoardColorRed('E', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A6':
@@ -255,8 +325,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G6':
         case 'H6':
         case 'I6':
-            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
-            enableBoard('H');
+            let disableCells6 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
+            if (disableCells6) {
+                enableBoard('H');
+                setBoardColorRed('H', 'danger')
+            } else {
+                setBoardColorRed('H', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A7':
@@ -268,8 +351,21 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G7':
         case 'H7':
         case 'I7':
-            disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
-            enableBoard('C');
+            let disableCells7 = disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
+            if (disableCells7) {
+                enableBoard('C');
+                setBoardColorRed('C', 'danger')
+            } else {
+                setBoardColorRed('C', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
             break;
 
         case 'A8':
@@ -281,9 +377,22 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G8':
         case 'H8':
         case 'I8':
-            disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
-            enableBoard('F');
-            break;
+            let disableCells8 = disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
+            if (disableCells8) {
+                enableBoard('F');
+                setBoardColorRed('F', 'danger')
+            } else {
+                setBoardColorRed('F', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('G', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
+                break;
 
         case 'A9':
         case 'B9':
@@ -294,9 +403,22 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G9':
         case 'H9':
         case 'I9':
-            disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H']);
-            enableBoard('I');
-            break;
+            let disableCells9 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H','I']);
+            if (disableCells9) {
+                enableBoard('I');
+                setBoardColorRed('I', 'danger')
+            } else {
+                setBoardColorRed('I', 'light')
+                setBoardColorRed('A', 'warning');
+                setBoardColorRed('B', 'warning');
+                setBoardColorRed('C', 'warning');
+                setBoardColorRed('D', 'warning');
+                setBoardColorRed('E', 'warning');
+                setBoardColorRed('F', 'warning');
+                setBoardColorRed('H', 'warning');
+                setBoardColorRed('I', 'warning');
+            }
+                break;
 
         default:
             enableAllCells()
@@ -350,4 +472,15 @@ function resetGame() {
         cell.innerText = '';
         cell.style.backgroundColor = '#f8ad30'
     });
+    setBoardColorRed('A', 'warning');
+    setBoardColorRed('B', 'warning');
+    setBoardColorRed('C', 'warning');
+    setBoardColorRed('D', 'warning');
+    setBoardColorRed('E', 'warning');
+    setBoardColorRed('F', 'warning');
+    setBoardColorRed('G', 'warning');
+    setBoardColorRed('H', 'warning');
+    setBoardColorRed('I', 'warning');
+    resetBbackgroundColor('A');
+
 }
