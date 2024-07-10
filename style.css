@@ -59,7 +59,7 @@
     z-index: 1;
     animation: shadow 3s infinite;
     font-weight: bold;
-    filter: blur(5px);
+    filter: blur(20px);
 }
 
 @keyframes shadow {
