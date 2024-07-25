@@ -15,21 +15,20 @@ let xCounter = 0;
 let oCounter = 0;
 let player1Name = ''; /*=  prompt('שם שחקן של ה - X :'); */
 let player2Name = '' /* = prompt('שם שחקן של ה - O :'); */
-if (player1Name === '') {
-    document.getElementById('player-X').innerHTML = `<i class="fa-solid fa-x fa-spin"></i> - Player`
-    document.getElementById('player-O').innerHTML = `<i class="fa-solid fa-o fa-spin text-danger"></i> - Player`
-} else {
+
+if (player1Name != '' && player2Name != '') {
     document.getElementById('player-X').innerText = player1Name
     document.getElementById('player-O').innerText = player2Name
+} else {
+    document.getElementById('player-X').innerHTML = `<i class="fa-solid fa-x fa-spin"></i> - Player`
+    document.getElementById('player-O').innerHTML = `<i class="fa-solid fa-o fa-spin text-danger"></i> - Player`
 }
-setBoardColorRed()
 
 
 
 function enableAllCells() {
     for (let boardId in boardState) {
         enableBoard(boardId);
-
     }
 }
 
@@ -45,11 +44,12 @@ function insert_X_Y(cellId) {
         let cell = document.getElementById(cellId);
         if (currentPlayer === 'X') {
             disableCellsBasedOnPlayer(cellId);
-            cell.style.backgroundColor = '#6CD4FF';
+            cell.style.color = 'blue'
+
         }
         else if (currentPlayer === 'O') {
             disableCellsBasedOnPlayer(cellId);
-            cell.style.backgroundColor = '#D36135';
+            cell.style.color = 'red';
         }
 
 
@@ -71,6 +71,7 @@ function insert_X_Y(cellId) {
 
         }
         disableCellsBasedOnPlayer(cellId);
+        setBoardColorRed(cellId);
     }
 }
 
@@ -78,7 +79,6 @@ function insert_X_Y(cellId) {
 
 function switchPlayers() {
     currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-
     document.getElementById('turn').innerHTML = currentPlayer;
 }
 
@@ -89,14 +89,13 @@ function handleGameEnd(winner) {
     if (winner === 'X') {
         xCounter++;
         document.getElementById('result-left').innerText = xCounter;
+        switchPlayers()
     } else if (winner === 'O') {
         oCounter++;
         document.getElementById('result-right').innerText = oCounter;
+        switchPlayers()
     }
-
-    // Additional actions on game end
-    setBoardColorRed();
-    resetBoard();
+    // resetBoard();
 }
 
 // פונקציה לבדיקת זוכה
@@ -124,28 +123,22 @@ function checkWinner() {
 
 
 
-
-
-
 // פונקציה לאיפוס הלוח
 function resetBoard() {
-    for (boardId in boardState) {
+    for (let boardId in boardState) {
         boardState[boardId] = ['', '', '', '', '', '', '', '', ''];
+        let cells = document.querySelectorAll(`#${boardId} .a`);
+        cells.forEach(cell => {
+            cell.innerText = '';
+            cell.style.backgroundColor = '#f8ad30';
+            cell.onclick = function () {
+                insert_X_Y(cell.id);
+            };
+        });
     }
-    // for (let boardId in boardState) {
-    //     let cells = document.querySelectorAll(`#${boardId} .a`);
-    //     cells.forEach(cell => {
-    //         cell.innerText = '';
-    //     });
-    // }
-    gamesCounter++;
     currentPlayer = 'X';
-    document.querySelector('#result-center').innerHTML = `${gamesCounter}`
+    switchPlayers();
 }
-
-
-
-
 
 
 
@@ -153,7 +146,6 @@ function resetBoard() {
 function disableCells(cellIds) {
     cellIds.forEach(id => {
         disableBoard(id);
-        console.log(`disabled - ${[id]}`);
     });
 }
 
@@ -163,27 +155,173 @@ function disableCells(cellIds) {
 function disableBoard(boardId) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
-        console.log([cell]);
         cell.onclick = null;
     });
 }
 
 
-
-
-function resetBbackgroundColor(boardId) {
-    let cells = document.querySelectorAll(`.${boardId} .a`);
-    cells.forEach(cell => {
-        cell.style.backgroundColor = '#000'
-    });
+function handleCellDisableAndColor(cellIds, boardId, enableBoardId, colorClass) {
+    let disableCellsResult = disableCells(cellIds);
+    if (disableCellsResult) {
+        enableBoard(enableBoardId);
+        resetBbackgroundColor(boardId);
+    } else {
+        setBoardColorRed(boardId, colorClass);
+        setBoardColorRed(boardId, colorClass)
+    }
 }
 
 
+let func1 = (disableCells1 = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'], resetColor = 'A', BoardColor = 'A') => {
+    let disableCellsResult = disableCells(disableCells1);
+    if (disableCellsResult) {
+        resetBbackgroundColor(resetColor);
+        enableBoard(BoardColor);
+
+    } else {
+        setBoardColorRed('A', 'light');
+        setBoardColorRed('a', 'warning');
+    }
+}
+let func2 = () => {
+    let disableCells2 = disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
+    if (disableCells2) {
+        enableBoard('D');
+        resetBbackgroundColor('D');
+    } else {
+        setBoardColorRed('D', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func3 = () => {
+    let disableCells3 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
+    if (disableCells3) {
+        enableBoard('G');
+        setBoardColorRed('G', 'light')
+    } else {
+        setBoardColorRed('G', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func4 = () => {
+    let disableCells4 = disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
+    if (disableCells4) {
+        enableBoard('B');
+        setBoardColorRed('B', 'danger')
+    } else {
+        setBoardColorRed('B', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func5 = () => {
+    let disableCells5 = disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
+    if (disableCells5) {
+        enableBoard('E');
+        setBoardColorRed('E', 'danger')
+    } else {
+        setBoardColorRed('E', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func6 = () => {
+    let disableCells6 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
+    if (disableCells6) {
+        enableBoard('H');
+        setBoardColorRed('H', 'danger')
+    } else {
+        setBoardColorRed('H', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func7 = () => {
+    let disableCells7 = disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
+    if (disableCells7) {
+        enableBoard('C');
+        setBoardColorRed('C', 'danger')
+    } else {
+        setBoardColorRed('C', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func8 = () => {
+    let disableCells8 = disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
+    if (disableCells8) {
+        enableBoard('F');
+        setBoardColorRed('F', 'danger')
+    } else {
+        setBoardColorRed('F', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+        setBoardColorRed('I', 'warning');
+    }
+}
+let func9 = () => {
+    let disableCells9 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H']);
+    if (disableCells9) {
+        enableBoard('I');
+        setBoardColorRed('I', 'danger')
+    } else {
+        setBoardColorRed('I', 'light')
+        setBoardColorRed('A', 'warning');
+        setBoardColorRed('B', 'warning');
+        setBoardColorRed('C', 'warning');
+        setBoardColorRed('D', 'warning');
+        setBoardColorRed('E', 'warning');
+        setBoardColorRed('F', 'warning');
+        setBoardColorRed('G', 'warning');
+        setBoardColorRed('H', 'warning');
+    }
+}
 
 let disableCellsBasedOnPlayer = function (cellId) {
-
     enableAllCells()
-
     switch (cellId) {
         case 'A1':
         case 'B1':
@@ -194,15 +332,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G1':
         case 'H1':
         case 'I1':
-            let disableCells1 = disableCells(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
-            if (disableCells1) {
-                enableBoard('A');
-                resetBbackgroundColor('A');
-
-            } else {
-                setBoardColorRed('A', 'light');
-                setBoardColorRed('a', 'warning');
-            }
+            func1(['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'], 'A', 'a', 'success')
             break;
 
         case 'A2':
@@ -214,21 +344,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G2':
         case 'H2':
         case 'I2':
-            let disableCells2 = disableCells(['A', 'B', 'C', 'E', 'F', 'G', 'H', 'I']);
-            if (disableCells2) {
-                enableBoard('D');
-                resetBbackgroundColor('D');
-            } else {
-                setBoardColorRed('D', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func2()
             break;
 
         case 'A3':
@@ -240,21 +356,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G3':
         case 'H3':
         case 'I3':
-            let disableCells3 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H', 'I']);
-            if (disableCells3) {
-                enableBoard('G');
-                setBoardColorRed('G', 'light')
-            } else {
-                setBoardColorRed('G', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func3()
             break;
 
         case 'A4':
@@ -266,21 +368,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G4':
         case 'H4':
         case 'I4':
-            let disableCells4 = disableCells(['A', 'C', 'D', 'E', 'F', 'G', 'H', 'I']);
-            if (disableCells4) {
-                enableBoard('B');
-                setBoardColorRed('B', 'danger')
-            } else {
-                setBoardColorRed('B', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func4()
             break;
 
         case 'A5':
@@ -292,21 +380,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G5':
         case 'H5':
         case 'I5':
-            let disableCells5 = disableCells(['A', 'B', 'C', 'D', 'F', 'G', 'H', 'I']);
-            if (disableCells5) {
-                enableBoard('E');
-                setBoardColorRed('E', 'danger')
-            } else {
-                setBoardColorRed('E', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func5()
             break;
 
         case 'A6':
@@ -318,21 +392,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G6':
         case 'H6':
         case 'I6':
-            let disableCells6 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'I']);
-            if (disableCells6) {
-                enableBoard('H');
-                setBoardColorRed('H', 'danger')
-            } else {
-                setBoardColorRed('H', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func6()
             break;
 
         case 'A7':
@@ -344,21 +404,7 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G7':
         case 'H7':
         case 'I7':
-            let disableCells7 = disableCells(['A', 'B', 'D', 'E', 'F', 'G', 'H', 'I']);
-            if (disableCells7) {
-                enableBoard('C');
-                setBoardColorRed('C', 'danger')
-            } else {
-                setBoardColorRed('C', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
+            func7()
             break;
 
         case 'A8':
@@ -370,22 +416,8 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G8':
         case 'H8':
         case 'I8':
-            let disableCells8 = disableCells(['A', 'B', 'C', 'D', 'E', 'G', 'H', 'I']);
-            if (disableCells8) {
-                enableBoard('F');
-                setBoardColorRed('F', 'danger')
-            } else {
-                setBoardColorRed('F', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-                setBoardColorRed('I', 'warning');
-            }
-                break;
+            func8()
+            break;
 
         case 'A9':
         case 'B9':
@@ -396,29 +428,13 @@ let disableCellsBasedOnPlayer = function (cellId) {
         case 'G9':
         case 'H9':
         case 'I9':
-            let disableCells9 = disableCells(['A', 'B', 'C', 'D', 'E', 'F', 'H']);
-            if (disableCells9) {
-                enableBoard('I');
-                setBoardColorRed('I', 'danger')
-            } else {
-                setBoardColorRed('I', 'light')
-                setBoardColorRed('A', 'warning');
-                setBoardColorRed('B', 'warning');
-                setBoardColorRed('C', 'warning');
-                setBoardColorRed('D', 'warning');
-                setBoardColorRed('E', 'warning');
-                setBoardColorRed('F', 'warning');
-                setBoardColorRed('G', 'warning');
-                setBoardColorRed('H', 'warning');
-            }
-                break;
+            func9()
+            break;
 
         default:
-            enableAllCells()
             break;
     }
 }
-
 
 
 
@@ -443,7 +459,7 @@ function enableBoard(boardId) {
 function setBoardColorRed(boardId, newColor) {
     let cells = document.querySelectorAll(`#${boardId} .a`);
     cells.forEach(cell => {
-        cell.classList.remove('bg-warning');
+        cell.classList.remove('bg-light');
         cell.classList.add(`bg-${newColor}`);
     });
     return newColor;
